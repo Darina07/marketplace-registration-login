@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Items{% endblock %}
+
+{% block body %}
+
+    <h1>Items</h1>
+    <a href="/items/create">ADD PRODUCT</a>
+
+    <div>
+        {% for item in items %}
+            <div>
+                <h2>Title: {{ item.title }}</h2>
+                <p>Category: {{ item.category_title }}</p>
+                <p>Description: {{ item.description }}</p>
+                <p>Published at: {{ item.created_at }}</p>
+                <a href="/items/{{item.id}}/edit">EDIT</a>
+                <form action="/items/delete" method="post">
+                    <button type="submit" name="delete" value="{{ item.id }}">DELETE</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

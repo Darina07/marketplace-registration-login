@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Items{% endblock %}
+
+{% block body %}
+
+<h1>Edit Item</h1>
+
+    <div class="col">
+        <form action="/items/{{item.id}}/update" method="post">
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" class="form-control" name="title" value="{{item.title}}" id="title" aria-describedby="emailHelp">
+
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" name="description" id="description">{{item.description}}</textarea>
+
+              </div>
+
+              <div class="mb-3">
+                <label for="categories_id" class="form-label">Select Category</label>{{item.categories_id}}
+              <select name="categories_id" id="categories_id" class="form-select" aria-label="Default select example">
+                <option selected>Select Category</option>
+                {% for cat in categories %}
+                <option {% if item.categories_id == cat.id %} selected="selected" {% endif %}  value="{{cat.id}}">{{cat.name}}</option>
+                {% endfor %}
+
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+    </div>
+
+</div>
+
+
+{% endblock %}

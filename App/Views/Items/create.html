@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Item{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+{% block body %}
+
+    <h1>Add Item</h1>
+
+    {% if item.errors is not empty %}
+        <p>Errors:</p>
+        <ul>
+            {% for error in item.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="post" id="formProfile" action="/items/store">
+
+        <div>
+            <label for="inputTitle">Title</label>
+            <input id="inputTitle" name="title" placeholder="Title" value="{{ title }}" required />
+        </div>
+        <div>
+            <label for="inputDescription">Description</label>
+            <input id="inputDescription" name="description" placeholder="Description" value="{{ description }}"  required/>
+        </div>
+        <div>
+            <label for="inputCategory">Category</label>
+            <select id="inputCategory" name="category" required>
+                <option value="" disabled selected>Select a category</option>
+                 {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit">Save</button>
+        <a href="/items/index">Cancel</a>
+
+    </form>
+
+{% endblock %}
